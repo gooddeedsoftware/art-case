@@ -1,4 +1,4 @@
-# Laravel-AdminLTE
+# Step To Install
 
 ## How to use:
 - Clone `git clone {url-repo}`
