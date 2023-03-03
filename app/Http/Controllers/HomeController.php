@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Register;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -84,5 +84,26 @@ class HomeController extends Controller
     public function poetryDetail()
     {
         return view('poetry-detail');
+    }
+    public function registerYour()
+    {
+        return view('register');
+    }
+    public function loginArtist()
+    {
+        return view('art-login');
+    }
+
+    
+    public function registerStore(Request $request)
+    {
+        $data = $request->except(['_token']);
+        if(Register::create($data)){ 
+            return redirect()->back();
+           }
+       else{
+           return redirect()->back()->with('error','Something went wrong!');
+       }
+       
     }
 }

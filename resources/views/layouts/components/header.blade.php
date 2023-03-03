@@ -27,9 +27,9 @@
                   <li class="subMenuWrapper"><a href="Login.html" class="submenuLink">Login</a>
                     <div class="subMenu">
                       <ul>
-                        <li><a href="Register Yourself.html">Register Yourself</a></li>
-                        <li><a href="Login.html">Login For Artist</a></li>
-                        <li><a href="Login.html">Login For Author</a></li>
+                        <li><a href="{{route('register-your')}}">Register Yourself</a></li>
+                        <li><a href="{{route('login-artist')}}">Login For Artist</a></li>
+                        <li><a href="{{route('login-artist')}}">Login For Author</a></li>
                       </ul>
                     </div>
                   </li>

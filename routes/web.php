@@ -25,6 +25,9 @@ Route::get('/art-detail', [HomeController::class, 'artDetail'])->name('art-detai
 Route::get('/poetry-detail', [HomeController::class, 'poetryDetail'])->name('poetry-detail');
 Route::get('/author-showcase', [HomeController::class, 'authorShowCase'])->name('author-showcase');
 Route::get('/author-showcase-profile', [HomeController::class, 'authorShowCaseProfile'])->name('author-showcase-profile');
+Route::get('/register-your', [HomeController::class, 'registerYour'])->name('register-your');
+Route::get('/login-artist', [HomeController::class, 'loginArtist'])->name('login-artist');
+Route::post('/registerstore', [HomeController::class, 'registerStore'])->name('register-store');
 
 Route::prefix('administrator')->group(function () {
     Route::prefix('manage-user')->group(function () {
