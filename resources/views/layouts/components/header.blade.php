@@ -7,7 +7,7 @@
             <div class="col-md-4">
               <div class="menuWrapper">
                 <ul>
-                  <li><a href="index.html">Home</a></li>
+                  <li><a href="{{route('home')}}">Home</a></li>
                   <li><a href="{{route('artist-showcase')}}">Artist</a></li>
                   <li><a href="{{route('author-showcase')}}">Author</a></li>
                 </ul>
@@ -15,7 +15,7 @@
             </div>
             <div class="col-md-4">
               <div class="logoWrapper text-center">
-                <a href="index.html">
+                <a href="{{route('home')}}">
                   <img src="{{asset('image/logo.png')}}" alt="Art Showcase" class="img-fluid">
                 </a>
               </div>
@@ -27,9 +27,9 @@
                   <li class="subMenuWrapper"><a href="Login.html" class="submenuLink">Login</a>
                     <div class="subMenu">
                       <ul>
-                        <li><a href="{{route('register-your')}}">Register Yourself</a></li>
-                        <li><a href="{{route('login-artist')}}">Login For Artist</a></li>
-                        <li><a href="{{route('login-artist')}}">Login For Author</a></li>
+                        <li><a href="{{route('register')}}">Register Yourself</a></li>
+                        <li><a href="{{route('login')}}">Login For Artist</a></li>
+                        <li><a href="{{route('login')}}">Login For Author</a></li>
                       </ul>
                     </div>
                   </li>
@@ -40,7 +40,7 @@
         </div>
         <div class="mobileNav">
           <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="{{route('home')}}">
               <img src="{{asset('image/logo.png')}}" alt="Art Showcase" class="img-fluid mobLogo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -50,7 +50,7 @@
             <div class="collapse navbar-collapse mt-3" id="navbarNav">
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                  <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{{route('artist-showcase')}}">Artist</a>
