@@ -35,7 +35,7 @@
                       <h6>Links</h6>
                     </div>
                     <ul>
-                      <li><a href="index.html">Home</a></li>
+                      <li><a href="{{route('home')}}">Home</a></li>
                       <li><a href="{{route('author-showcase')}}">Authore</a></li>
                       <li><a href="{{route('artist-showcase')}}">Artist</a></li>
                       <li><a href="Login.html">Login</a></li>
