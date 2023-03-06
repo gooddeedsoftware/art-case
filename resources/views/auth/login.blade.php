@@ -49,7 +49,7 @@
                 <input type="submit" value="Login" >
               </div>
               <div class="already">
-                <p class="font-size-18">Don't have an account? <a href="SignUp.html">SignUp</a></p>
+                <p class="font-size-18">Don't have an account? <a href="{{route('register')}}">SignUp</a></p>
               </div>
             </form>
           </div>

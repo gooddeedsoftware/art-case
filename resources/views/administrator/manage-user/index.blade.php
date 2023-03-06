@@ -96,8 +96,8 @@
                         return meta.row + meta.settings._iDisplayStart + 1;
                     }
                 }, {
-                    data: 'name',
-                    name: 'name',
+                    data: 'first_name',
+                    name: 'first_name',
                 }, {
                     data: 'email',
                     name: 'email',
@@ -166,11 +166,11 @@
             $('#table-user').on('click', '.btn-delete', function(event){
                 event.preventDefault();
                 const id       = $(this).data('id');
-                const name     = $(this).data('name');
+                const name     = $(this).data('first_name');
                 const formData = new FormData();
                 const url      = "{{ route('manage.user.delete', ['id' => ':id']) }}";
                 formData.append('id', id);
-                formData.append('name', name);
+                formData.append('first_name', name);
                 formData.append('_method', 'DELETE');
                 formData.append('_token', '{{ csrf_token() }}');
                 swalConfirm({

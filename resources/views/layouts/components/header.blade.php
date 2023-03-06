@@ -24,15 +24,31 @@
               <div class="leftmenuWrapper">
                 <ul>
                   <li><a href="#">Showcase Your Art</a></li>
-                  <li class="subMenuWrapper"><a href="Login.html" class="submenuLink">Login</a>
-                    <div class="subMenu">
-                      <ul>
-                        <li><a href="{{route('register')}}">Register Yourself</a></li>
-                        <li><a href="{{route('login')}}">Login For Artist</a></li>
-                        <li><a href="{{route('login')}}">Login For Author</a></li>
-                      </ul>
-                    </div>
-                  </li>
+                  @if(Auth::check())
+                    <li class="subMenuWrapper"><a href="Login.html" class="submenuLink">{{AUth::user()->first_name}}</a>
+                      <div class="subMenu">
+                        <ul>
+                          <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                          <li>
+                            <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                              @csrf
+                            </form>
+                        </li>
+                        </ul>
+                      </div>
+                    </li>
+                  @else
+                    <li class="subMenuWrapper"><a href="Login.html" class="submenuLink">Login</a>
+                      <div class="subMenu">
+                        <ul>
+                          <li><a href="{{route('register')}}">Register Yourself</a></li>
+                          <li><a href="{{route('login')}}">Login For Artist</a></li>
+                          <li><a href="{{route('login')}}">Login For Author</a></li>
+                        </ul>
+                      </div>
+                    </li>
+                  @endif
                 </ul>
               </div>
             </div>
