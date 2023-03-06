@@ -19,3 +19,4 @@ yarn-error.log
 fields_sample.json
 rr
 .rr.yaml
+composer.lock
