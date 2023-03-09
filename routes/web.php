@@ -16,7 +16,7 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/artist-showcase', [HomeController::class, 'artistShowCase'])->name('artist-showcase');
@@ -27,6 +27,7 @@ Route::get('/author-showcase', [HomeController::class, 'authorShowCase'])->name(
 Route::get('/author-showcase-profile', [HomeController::class, 'authorShowCaseProfile'])->name('author-showcase-profile');
 
 Route::prefix('administrator')->group(function () {
+    Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
     Route::prefix('manage-user')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('manage.user.index');
         Route::post('create', [UserController::class, 'create'])->name('manage.user.create');

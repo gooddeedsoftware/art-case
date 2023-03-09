@@ -24,13 +24,19 @@
                   <div>
                     <label for="First Name" class="form-label font-size-18">First Name</label
                     >
-                    <input type="text" class="form-control" id="first name" name="first_name" placeholder="" required />
+                    <input type="text" class="form-control @error('first_name') is-invalid @enderror" id="first_name" name="first_name" placeholder="" value="{{old('first_name')}}" required />
+                    @error('first_name')
+                      <span class="error invalid-feedback">{{ $message }}</span>
+                    @enderror
                   </div>
                 </div>
                 <div class="col-12 col-sm-6">
                   <div>
                     <label for="Last Name" class="form-label font-size-18">Last Name</label>
-                    <input type="text" class="form-control" name="last_name" id="Last Name"   required />
+                    <input type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" id="last_name"    value="{{old('last_name')}}" required  />
+                    @error('last_name')
+                      <span class="error invalid-feedback">{{ $message }}</span>
+                    @enderror
                   </div>
                 </div>
               </div>
@@ -38,7 +44,31 @@
                 <div class="col-12">
                   <div class="mb-3">
                     <label for="Email" class="form-label font-size-18">Email</label>
-                    <input type="text" class="form-control" name="email" id="Email" placeholder="" required />
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder=""  value="{{old('email')}}" required />
+                    @error('email')
+                      <span class="error invalid-feedback">{{ $message }}</span>
+                    @enderror
+                  </div>
+                </div>
+              </div>
+              <div class="row my-2">
+                <div class="col-12 col-sm-6">
+                  <div>
+                    <label for="Password" class="form-label font-size-18">Password</label>
+                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="" value="{{old('password')}}" required />
+                    @error('password')
+                      <span class="error invalid-feedback">{{ $message }}</span>
+                    @enderror
+                  </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                  <div>
+                    <label for="confirmed" class="form-label font-size-18">Confirm Password</label>
+                    <input type="text" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" value="{{old('password_confirmation')}}" id="password_confirmation" required
+                    />
+                    @error('confirmed')
+                      <span class="error invalid-feedback">{{ $message }}</span>
+                    @enderror
                   </div>
                 </div>
               </div>
@@ -47,14 +77,20 @@
                   <div>
                     <label for="Mobile Number" class="form-label font-size-18">Mobile Number</label
                     >
-                    <input type="text" class="form-control" name="number" id="Mobile Number"   placeholder="" required />
+                    <input type="text" class="form-control @error('mobile') is-invalid @enderror" name="mobile" id="mobile"   placeholder=""  value="{{old('mobile')}}" required />
+                    @error('mobile')
+                      <span class="error invalid-feedback">{{ $message }}</span>
+                    @enderror
                   </div>
                 </div>
                 <div class="col-12 col-sm-6">
                   <div>
                     <label for="Country" class="form-label font-size-18">Country</label>
-                    <input type="text" class="form-control" name="country" id="Country" required
+                    <input type="text" class="form-control @error('country') is-invalid @enderror" name="country" id="country"  value="{{old('country')}}" required
                     />
+                    @error('country')
+                      <span class="error invalid-feedback">{{ $message }}</span>
+                    @enderror
                   </div>
                 </div>
               </div>
@@ -73,6 +109,9 @@
                       <button type="button" class="customeBtn" id="customeBtn4"><em>+</em></button>
                       <input type="file" name="img5" id="realBtn5" hidden="hidden">
                       <button type="button" class="customeBtn" id="customeBtn5"><em>+</em></button>
+                      @error('image')
+                        <span class="error invalid-feedback">{{ $message }}</span>
+                      @enderror
                     </div>
                   </div>
                 </div>
@@ -83,7 +122,10 @@
                     <label for="About us" class="form-label font-size-18"
                       >Please Tell Us A Little About Yourself</label
                     >
-                    <textarea class="form-control" name="aboutnote" id="registeredAddress" rows="3" placeholder="" required></textarea>
+                    <textarea class="form-control @error('aboutnote') is-invalid @enderror" name="aboutnote" id="aboutnote" rows="3" placeholder="" required>{{old('aboutnote')}}</textarea>
+                    @error('aboutnote')
+                      <span class="error invalid-feedback">{{ $message }}</span>
+                    @enderror
                   </div>
                 </div>
               </div>

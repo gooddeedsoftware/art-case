@@ -25,6 +25,7 @@ class UserFactory extends Factory
         return [
             'first_name' => $this->faker->name,
             'last_name' => $this->faker->name,
+            'name' => '',
             'mobile' => '1234567890',
             'image' => '',
             'aboutnote' => '',
