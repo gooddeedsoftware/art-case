@@ -21,14 +21,9 @@ class UserController extends Controller
     }
 
     public function create(Request $request){
-        try {
-            return $this->sendSuccess([
-                'message'   => 'User has been created',
-                'data'      => $this->userService->create($request->all())
-            ]);
-        } catch (\Exception $e) {
-            return $this->sendError($e);
-        }
+       
+        return view("administrator.manage-user.createForm");
+        
     }
 
     public function update(UpdateUserRequest $request, $id){
@@ -51,5 +46,19 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return $this->sendError($e);
         }
+    }
+
+    public function author(Request $request){
+        if($request->ajax()) {
+            return $this->userService->get($request->all());
+        }
+        return view('administrator.manage-author.index');
+    }
+
+    public function artist(Request $request){
+        if($request->ajax()) {
+            return $this->userService->get($request->all());
+        }
+        return view('administrator.manage-artist.index');
     }
 }

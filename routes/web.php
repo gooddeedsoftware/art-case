@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Administrator\ManagementUser\UserController;
+use App\Http\Controllers\Administrator\ManagementArtist\ArtistController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -30,8 +31,14 @@ Route::prefix('administrator')->group(function () {
     Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
     Route::prefix('manage-user')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('manage.user.index');
-        Route::post('create', [UserController::class, 'create'])->name('manage.user.create');
+        Route::get('create', [UserController::class, 'create'])->name('manage.user.create');
         Route::put('update/{id}', [UserController::class, 'update'])->name('manage.user.update');
         Route::delete('delete/{id}', [UserController::class, 'delete'])->name('manage.user.delete');
+       
+        Route::get('author',[UserController::class,'author'])->name('author.index');
+        Route::get('artist',[UserController::class,'artist'])->name('artist.index');
+   
+   
     });
+    
 });
