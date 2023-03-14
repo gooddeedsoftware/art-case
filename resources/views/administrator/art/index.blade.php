@@ -25,6 +25,16 @@
                         <div class="col-6 d-flex  justify-content-end">
                             <a href="{{route('art.create')}}" class="btn btn-primary">Create Art</a>
                         </div>
+                        @if(session('success'))
+                            <div class="alert alert-success mt-2">
+                                {{session('success')}}
+                            </div>
+                        @endif
+                        @if(session('error'))
+                            <div class="alert alert-danger  mt-2">
+                                {{session('error')}}
+                            </div>
+                        @endif
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -46,15 +56,22 @@
                                     <tbody>
                                         @foreach($data as $d)
                                     <tr role="row">
-                                            <th>{{$d->id}}</th>
-                                            <th>{{$d->title}}</th>
-                                            <th>{{$d->artistid}}</th>
-                                            <th>{{$d->image}}</th>
-                                            <th>{{$d->size}}</th>
-                                            <th>{{$d->height}}</th>
-                                            <th>{{$d->width}}</th>
-                                            <th><button class="btn btn-primary btn-edit"><a href="{{route('art.edit',$d->id)}}">Edit</a></button>
-                                            <button class="btn btn-danger btn-delete">Delete</button></th>
+                                            <td>{{$d->id}}</td>
+                                            <td>{{$d->title}}</td>
+                                            <td>{{$d->artist->first_name}} {{$d->artist->last_name}}</td>
+                                            <td>
+                                                <img src="{{asset('uploads/art/'.$d->image)}}" style="height: 150px;margin: 7px 0;">
+                                            </td>
+                                            <td>{{$d->size}}</td>
+                                            <td>{{$d->height}}</td>
+                                            <td>{{$d->width}}</td>
+                                            <td>
+                                                <a  type="button"  class="btn btn-sm btn-primary btn-edit"
+                                                    href="{{route('art.edit',$d->id)}}">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                </a>
+                                                <a type="button" data-id="{{$d->id}}" data-name="{{$d->artist->first_name}}" class="btn btn-danger btn-sm btn-delete"><i class="fas fa-trash-alt"></i></a>
+                                            </td>
                                            
                                            
                                         </tr>
@@ -80,52 +97,6 @@
 
         $(document).ready(function() {
             /**
-             * edit user
-             */
-            $('#table-user').on('click', '.btn-edit', function(event) {
-                event.preventDefault();
-                resetForm($('#user-form'));
-                const id = $(this).data('id');
-                $('.modal-title').html(`<i class="fas fa-pencil-alt"></i>  Edit User`);
-                $('#user-id').val(id);
-                $('.user-modal').modal('toggle');
-            });
-
-            /**
-             * Submit modal
-             */
-            $('#user-form').submit(function(event){
-                event.preventDefault();
-                const formData = new FormData(this);
-                formData.append('_method', 'PUT');
-                formData.append('_token', '{{ csrf_token() }}');
-                $.ajax({
-                    url: '{{ route('manage.user.update', ['id' => 1]) }}',
-                    data: formData,
-                    type:'POST',
-                    dataType: 'json',
-                    contentType: false,
-                    processData: false,
-                    beforeSend: function () {
-                        $('.btn-save').attr("disabled", true);
-                        $('.btn-save').text('Mengubah status...');
-                    },
-                    complete: function () {
-                        $('.btn-save').attr("disabled", false);
-                        $('.btn-save').text('Simpan Perubahan');
-                    },
-                    success: function (data) {
-                        if(data.status == 200) {
-                            swalSuccess('', data.nessage);
-                            tableUser();
-                            $('.user-modal').modal('toggle');
-                        }
-                    }
-                });
-                return false;
-            })
-
-            /**
              * Delete user
              */
             $('#table-user').on('click', '.btn-delete', function(event){
@@ -133,13 +104,13 @@
                 const id       = $(this).data('id');
                 const name     = $(this).data('first_name');
                 const formData = new FormData();
-                const url      = "{{ route('manage.user.delete', ['id' => ':id']) }}";
+                const url      = "{{ route('art.delete', ['id' => ':id']) }}";
                 formData.append('id', id);
                 formData.append('first_name', name);
                 formData.append('_method', 'DELETE');
                 formData.append('_token', '{{ csrf_token() }}');
                 swalConfirm({
-                    title: 'Delete user?',
+                    title: 'Delete Art?',
                     confirm: 'Delete!',
                     cancel: 'Cancel',
                     icon: 'question',
@@ -151,8 +122,8 @@
                             processData: false,
                             contentType: false,
                             success: function(result) {
-                                tableUser();
                                 swalSuccess('',result.message);
+                                location.reload();
                             }
                         })
                     }

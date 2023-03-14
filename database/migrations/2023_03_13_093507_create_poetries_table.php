@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('poetries', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('authorid');
-            $table->string('desc');
+            $table->string('user_id');
+            $table->text('description')->nullable();
             $table->text('image')->nullable();
             $table->timestamps();
             $table->softDeletes();
