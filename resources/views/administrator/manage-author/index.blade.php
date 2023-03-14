@@ -7,7 +7,7 @@
 @section('content-header')
     @component('administrator.components.content-header')
         @slot('title')
-            Management User
+            Management Author
         @endslot
     @endcomponent
 @endsection
@@ -19,11 +19,11 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="col-6 float-left ">
-                            <h3 class="card-title">Management User</h3>
+                            <h3 class="card-title">Management Author</h3>
 
                         </div>
                         <div class="col-6 d-flex  justify-content-end">
-                            <a href="{{route('manage.user.create')}}" class="btn btn-primary">Create User</a>
+                            <a href="{{route('manage.user.createAuthor')}}" class="btn btn-primary">Create Author</a>
                         </div>
                     </div>
                     <!-- /.card-header -->
@@ -36,6 +36,7 @@
                                             <th>No</th>
                                             <th>Name</th>
                                             <th>Email</th>
+                                            <th>Mobile</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -98,7 +99,7 @@
                     sortable: false,
                     width: '10%',
                     searchable: false,
-                    render: function(data, user, row, meta) {
+                    render: function(data, type, row, meta) {
                         return meta.row + meta.settings._iDisplayStart + 1;
                     }
                 }, {
@@ -107,6 +108,9 @@
                 }, {
                     data: 'email',
                     name: 'email',
+                },{
+                    data: 'mobile',
+                    name: 'mobile',
                 }, {
                     data: 'action',
                     name: 'action',

@@ -4,6 +4,8 @@ use App\Http\Controllers\Administrator\ManagementUser\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ArtController;
+use App\Http\Controllers\PoetryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,8 +32,26 @@ Route::prefix('administrator')->group(function () {
     Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
     Route::prefix('manage-user')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('manage.user.index');
-        Route::post('create', [UserController::class, 'create'])->name('manage.user.create');
+        Route::get('create', [UserController::class, 'create'])->name('manage.user.create');
         Route::put('update/{id}', [UserController::class, 'update'])->name('manage.user.update');
         Route::delete('delete/{id}', [UserController::class, 'delete'])->name('manage.user.delete');
+       
+        Route::get('author',[UserController::class,'author'])->name('author.index');
+        Route::get('create-author', [UserController::class, 'createAuthor'])->name('manage.user.createAuthor');
+        
+        Route::get('artist',[UserController::class,'artist'])->name('artist.index');
+        Route::get('create-artist', [UserController::class, 'createArtist'])->name('manage.user.createArtist');
+        
+        Route::get('art-table',[ArtController::class,'index'])->name('art.index');
+        Route::get('art-edit/{id}',[ArtController::class,'edit'])->name('art.edit');
+        Route::get('create-art', [ArtController::class, 'create'])->name('art.create');
+        Route::post('store-art', [ArtController::class, 'store'])->name('art.stor');
+       
+        Route::get('poetry-table',[PoetryController::class,'index'])->name('poetry.index');
+        Route::get('create-poetry', [PoetryController::class, 'create'])->name('poetry.create');
+        Route::post('store-poetry', [PoetryController::class, 'store'])->name('poetry.stor');
+        
+   
     });
+    
 });
