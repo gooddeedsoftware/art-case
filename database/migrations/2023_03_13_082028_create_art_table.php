@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('art', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('artistid');
+            $table->string('user_id');
             $table->string('size');
             $table->integer('height');
             $table->integer('width');
