@@ -30,4 +30,20 @@
             </a>
         </li>
     </ul>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{route('art.index') }}" class="nav-link {{ request()->is('*art-table') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Art </p>
+            </a>
+        </li>
+    </ul>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{route('poetry.index') }}" class="nav-link {{ request()->is('*poetry-table') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Poetry </p>
+            </a>
+        </li>
+    </ul>
 </li>

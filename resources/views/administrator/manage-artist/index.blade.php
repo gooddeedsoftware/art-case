@@ -23,7 +23,7 @@
 
                         </div>
                         <div class="col-6 d-flex  justify-content-end">
-                            <a href="{{route('manage.user.create')}}" class="btn btn-primary">Create Artist</a>
+                            <a href="{{route('manage.user.createArtist')}}" class="btn btn-primary">Create Artist</a>
                         </div>
                     </div>
                     <!-- /.card-header -->

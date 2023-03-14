@@ -98,7 +98,7 @@
                     sortable: false,
                     width: '10%',
                     searchable: false,
-                    render: function(data, type, row, meta) {
+                    render: function(data, user, row, meta) {
                         return meta.row + meta.settings._iDisplayStart + 1;
                     }
                 }, {

@@ -21,9 +21,19 @@ class UserController extends Controller
     }
 
     public function create(Request $request){
-       
-        return view("administrator.manage-user.createForm");
+        $type = 'user';
+        return view("administrator.manage-user.createForm", compact('type'));
         
+    }
+
+    public function createAuthor(Request $request){
+        $type = 'author';
+        return view("administrator.manage-user.createForm", compact('type'));        
+    }
+
+    public function createArtist(Request $request){
+        $type = 'artist';
+        return view("administrator.manage-user.createForm", compact('type'));
     }
 
     public function update(UpdateUserRequest $request, $id){
@@ -61,4 +71,6 @@ class UserController extends Controller
         }
         return view('administrator.manage-artist.index');
     }
+
+    
 }

@@ -12,6 +12,7 @@
                 @include('administrator.layouts.menu')
             </ul>
         </nav>
+       
     </div>
 
 </aside>

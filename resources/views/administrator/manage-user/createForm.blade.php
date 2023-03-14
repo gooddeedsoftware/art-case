@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">
                     <div class="col-6 float-left ">
-                            <h3 class="card-title ">ADD User</h3>
+                            <h3 class="card-title  text-uppercase">Add {{$type}}</h3>
                         </div>
                         <div class="col-6 d-flex  justify-content-end">
                             <a href="" class="btn btn-primary">Back</a>
@@ -17,8 +17,9 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
+                    <form action="{{route('register')}}" method="post">
+                                @csrf()
                         <div class="row">
-                          
                                 <div class="col-md-6">
                                     <label for="first_name" class="col-form-label">First Name</label>
                                     <input type="text" name="first_name" class="form-control" placeholder="Enter Your First Name" required />
@@ -33,20 +34,20 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="mobile" class="col-form-label">mobile</label>
-                                    <input type="text" class="form-control " name="mobile" id="mobile"  placeholder="Enter Your Password"   required />
+                                    <input type="text" class="form-control " name="mobile" id="mobile"  placeholder="Enter Your mobile number"   required />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="mobile" class="col-form-label">Country</label>
+                                    <input type="text" class="form-control " name="country" id="mobile"  placeholder="Enter Your country"   required />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="mobile" class="col-form-label">Bio</label>
-                                    <input type="text" name="bio"  id="realBtn1" class="form-control">
+                                    <input type="text" name="aboutnote"  id="realBtn1" class="form-control">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="mobile" class="col-form-label">Profile</label>
                                     <input type="file" name="img"  id="realBtn1" class="form-control">
                                    
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="mobile" class="col-form-label">Post</label>
-                                    <input type="file" name="post"  id="realBtn1" class="form-control">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="password" class="col-form-label">Password</label>
@@ -57,8 +58,11 @@
                             <button class="btn btn-primary">
                                 Submit
                             </button>
+                    
                         </div>
+                    
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

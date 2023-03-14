@@ -7,7 +7,7 @@
 @section('content-header')
     @component('administrator.components.content-header')
         @slot('title')
-            Management Author
+            Art Management
         @endslot
     @endcomponent
 @endsection
@@ -19,28 +19,46 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="col-6 float-left ">
-                            <h3 class="card-title">Management Author</h3>
+                            <h3 class="card-title">Art Management</h3>
 
                         </div>
                         <div class="col-6 d-flex  justify-content-end">
-                            <a href="{{route('manage.user.createAuthor')}}" class="btn btn-primary">Create Author</a>
+                            <a href="{{route('art.create')}}" class="btn btn-primary">Create Art</a>
                         </div>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-12">
-                                <table id="table-user" class="table table-bordered">
+                                <table id="table-user" class="table table-bordered text-center">
                                     <thead class="thead-dark">
                                         <tr role="row">
                                             <th>No</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Mobile</th>
+                                            <th>Title</th>
+                                            <th>Artist Name</th>
+                                            <th>Art</th>
+                                            <th>size</th>
+                                            <th>height</th>
+                                            <th>width</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach($data as $d)
+                                    <tr role="row">
+                                            <th>{{$d->id}}</th>
+                                            <th>{{$d->title}}</th>
+                                            <th>{{$d->artistid}}</th>
+                                            <th>{{$d->image}}</th>
+                                            <th>{{$d->size}}</th>
+                                            <th>{{$d->height}}</th>
+                                            <th>{{$d->width}}</th>
+                                            <th><button class="btn btn-primary btn-edit"><a href="{{route('art.edit',$d->id)}}">Edit</a></button>
+                                            <button class="btn btn-danger btn-delete">Delete</button></th>
+                                           
+                                           
+                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -50,78 +68,15 @@
             </div>
         </div>
     </div>
-    <!-- Modal -->
-    <div class="modal fade user-modal" tabindex="-1" role="dialog" aria-labelledby="user-modal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"><i class="fas fa-pencil-alt"></i> Create User</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form name="user-form" id="user-form">
-                    <input id="user-id" type="hidden">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="name" class="col-form-label">Name</label>
-                            <input type="text" name="name" class="form-control" id="name" placeholder="John doe">
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="col-form-label">Email</label>
-                            <input type="text" name="email" class="form-control" id="email" placeholder="john@example.com">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-primary btn-save" value="Save">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+  
+  
 @endsection
 
 @push('page_scripts')
     @include('administrator.layouts.assets.js.datatables_js')
 
     <script>
-        tableUser();
-        /**
-         * load table user
-         */
-        function tableUser() {
-            generateDataTable({
-                selector: $('#table-user'),
-                url: '{{ route('manage.user.index') }}',
-                columns: [{
-                    data: null,
-                    sortable: false,
-                    width: '10%',
-                    searchable: false,
-                    render: function(data, type, row, meta) {
-                        return meta.row + meta.settings._iDisplayStart + 1;
-                    }
-                }, {
-                    data: 'first_name',
-                    name: 'first_name',
-                }, {
-                    data: 'email',
-                    name: 'email',
-                },{
-                    data: 'mobile',
-                    name: 'mobile',
-                }, {
-                    data: 'action',
-                    name: 'action',
-                    width: '20%',
-                }],
-                columnDefs: [{
-                    className: 'text-center',
-                    targets: [0, 1, 2, 3]
-                }, ],
-            });
-        }
+       
 
         $(document).ready(function() {
             /**
