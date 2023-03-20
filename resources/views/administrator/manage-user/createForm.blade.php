@@ -17,28 +17,29 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                    <form action="{{route('register')}}" method="post">
+                    <form action="@if(!$edit){{route('manage.user.store')}}@else{{route('manage.user.update', $user->id)}}@endif" method="post"  enctype="multipart/form-data">
                                 @csrf()
+                        <input type="hidden" name="type" value="@if($edit){{$user->type}}@else{{$type}}@endif">
                         <div class="row">
                                 <div class="col-md-6">
                                     <label for="first_name" class="col-form-label">First Name</label>
-                                    <input type="text" name="first_name" class="form-control" placeholder="Enter Your First Name" required />
+                                    <input type="text" name="first_name" class="form-control" placeholder="Enter Your First Name" value="@if($edit){{$user->type}}@else{{$type}}@endif" required />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="last_name" class="col-form-label">Last Name</label>
-                                    <input type="text" name="last_name" class="form-control" placeholder="Enter Your Last Name" required/>
+                                    <input type="text" name="last_name" class="form-control" placeholder="Enter Your Last Name" value="@if($edit){{$user->type}}@else{{$type}}@endif" required/>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="email" class="col-form-label">Email</label>
-                                    <input type="email" class="form-control " name="email" id="email" placeholder="Enter Your Email"   required />
+                                    <input type="email" class="form-control " name="email" id="email" placeholder="Enter Your Email" value="@if($edit){{$user->type}}@else{{$type}}@endif"   required />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="mobile" class="col-form-label">mobile</label>
-                                    <input type="text" class="form-control " name="mobile" id="mobile"  placeholder="Enter Your mobile number"   required />
+                                    <input type="text" class="form-control " name="mobile" id="mobile"  placeholder="Enter Your mobile number" value="@if($edit){{$user->type}}@else{{$type}}@endif"  required />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="mobile" class="col-form-label">Country</label>
-                                    <input type="text" class="form-control " name="country" id="mobile"  placeholder="Enter Your country"   required />
+                                    <input type="text" class="form-control " name="country" id="mobile"  placeholder="Enter Your country" value="@if($edit){{$user->type}}@else{{$type}}@endif"  required />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="mobile" class="col-form-label">Bio</label>
@@ -46,7 +47,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="mobile" class="col-form-label">Profile</label>
-                                    <input type="file" name="img"  id="realBtn1" class="form-control">
+                                    <input type="file" name="image"  id="realBtn1" class="form-control">
                                    
                                 </div>
                                 <div class="col-md-6">
