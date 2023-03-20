@@ -41,6 +41,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach($data as $d)
+                                    <tr role="row">
+                                            <th>{{$d->id}}</th>
+                                            <th>{{$d->first_name}}</th>
+                                            <th>{{$d->email}}</th>
+                                            <th>{{$d->mobile}}</th>
+                                            <th>
+                                            <a  type="button"  class="btn btn-sm btn-primary btn-edit"
+                                                    href="">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                </a>
+                                                <a type="button" data-id="{{$d->id}}" data-name="" class="btn btn-danger btn-sm btn-delete"><i class="fas fa-trash-alt"></i></a>
+                                           
+                                            </th>
+                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -86,43 +102,7 @@
     @include('administrator.layouts.assets.js.datatables_js')
 
     <script>
-        tableUser();
-        /**
-         * load table user
-         */
-        function tableUser() {
-            generateDataTable({
-                selector: $('#table-user'),
-                url: '{{ route('manage.user.index') }}',
-                columns: [{
-                    data: null,
-                    sortable: false,
-                    width: '10%',
-                    searchable: false,
-                    render: function(data, type, row, meta) {
-                        return meta.row + meta.settings._iDisplayStart + 1;
-                    }
-                }, {
-                    data: 'first_name',
-                    name: 'first_name',
-                }, {
-                    data: 'email',
-                    name: 'email',
-                },{
-                    data: 'mobile',
-                    name: 'mobile',
-                }, {
-                    data: 'action',
-                    name: 'action',
-                    width: '20%',
-                }],
-                columnDefs: [{
-                    className: 'text-center',
-                    targets: [0, 1, 2, 3]
-                }, ],
-            });
-        }
-
+    
         $(document).ready(function() {
             /**
              * edit user

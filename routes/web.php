@@ -33,11 +33,12 @@ Route::prefix('administrator')->group(function () {
     Route::prefix('manage-user')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('manage.user.index');
         Route::get('create', [UserController::class, 'create'])->name('manage.user.create');
+        Route::post('store', [UserController::class, 'store'])->name('manage.user.store');
+        Route::get('edit{id}',[UserController::class,'edit'])->name('manage.user.edit');
         Route::put('update/{id}', [UserController::class, 'update'])->name('manage.user.update');
         Route::delete('delete/{id}', [UserController::class, 'delete'])->name('manage.user.delete');
         Route::get('author',[UserController::class,'author'])->name('author.index');
         Route::get('create-author', [UserController::class, 'createAuthor'])->name('manage.user.createAuthor');
-        
         Route::get('artist',[UserController::class,'artist'])->name('artist.index');
         Route::get('create-artist', [UserController::class, 'createArtist'])->name('manage.user.createArtist');
     });
