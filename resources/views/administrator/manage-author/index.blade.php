@@ -49,7 +49,7 @@
                                             <th>{{$d->mobile}}</th>
                                             <th>
                                             <a  type="button"  class="btn btn-sm btn-primary btn-edit"
-                                                    href="">
+                                                    href="{{route('manage.user.edit',$d->id)}}">
                                                         <i class="fas fa-pencil-alt"></i>
                                                 </a>
                                                 <a type="button" data-id="{{$d->id}}" data-name="" class="btn btn-danger btn-sm btn-delete"><i class="fas fa-trash-alt"></i></a>

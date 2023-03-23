@@ -19,110 +19,23 @@
       <div class="showcaseUserWrapper">
         <div class="container">
           <div class="row">
-            <div class="col-6 col-sm-6 col-md-3">
-              <a href="{{route('artist-showcase-profile')}}">
-                <div class="showCaseUserCard">
-                  <div class="userImg">
-                    <img src="{{asset('image/ArtistShowcase1.png')}}" alt="Artist1" class="img-fluid">
+            @if($artists)
+              @foreach($artists as $artist)
+                <div class="col-6 col-sm-6 col-md-3">
+                  <a href="{{route('artist-showcase-profile', $artist->id)}}">
+                    <div class="showCaseUserCard">
+                      <div class="userImg">
+                        <img src="{{asset('uploads/users/'.$artist->image)}}" alt="Artist1" class="img-fluid">
+                      </div>
+                      <div class="userDetails">
+                        <h6>{{$artist->first_name}} {{$artist->last_name}}</h6>
+                        <!-- <p>Art Expert</p> -->
+                      </div>
                   </div>
-                  <div class="userDetails">
-                    <h6>Elizabeth Bishops</h6>
-                    <p>Art Expert</p>
-                  </div>
-              </div>
-              </a>
-            </div>
-            <div class="col-6 col-sm-6 col-md-3">
-              <a href="{{route('artist-showcase-profile')}}">
-                <div class="showCaseUserCard">
-                  <div class="userImg">
-                    <img src="{{asset('image/ArtistShowcase2.png')}}" alt="Artist1" class="img-fluid">
-                  </div>
-                  <div class="userDetails">
-                    <h6>Elizabeth Bishops</h6>
-                    <p>Art Expert</p>
-                  </div>
-              </div>
-              </a>
-            </div>
-            <div class="col-6 col-sm-6 col-md-3">
-              <a href="{{route('artist-showcase-profile')}}">
-                <div class="showCaseUserCard">
-                  <div class="userImg">
-                    <img src="{{asset('image/ArtistShowcase3.png')}}" alt="Artist1" class="img-fluid">
-                  </div>
-                  <div class="userDetails">
-                    <h6>Elizabeth Bishops</h6>
-                    <p>Art Expert</p>
-                  </div>
-              </div>
-              </a>
-            </div>
-            <div class="col-6 col-sm-6 col-md-3">
-              <a href="{{route('artist-showcase-profile')}}">
-                <div class="showCaseUserCard">
-                  <div class="userImg">
-                    <img src="{{asset('image/ArtistShowcase4.png')}}" alt="Artist1" class="img-fluid">
-                  </div>
-                  <div class="userDetails">
-                    <h6>Elizabeth Bishops</h6>
-                    <p>Art Expert</p>
-                  </div>
-              </div>
-              </a>
-            </div>
-            <div class="col-6 col-sm-6 col-md-3">
-              <a href="{{route('artist-showcase-profile')}}">
-                <div class="showCaseUserCard">
-                  <div class="userImg">
-                    <img src="{{asset('image/ArtistShowcase5.png')}}" alt="Artist1" class="img-fluid">
-                  </div>
-                  <div class="userDetails">
-                    <h6>Elizabeth Bishops</h6>
-                    <p>Art Expert</p>
-                  </div>
-              </div>
-              </a>
-            </div>
-            <div class="col-6 col-sm-6 col-md-3">
-              <a href="{{route('artist-showcase-profile')}}">
-                <div class="showCaseUserCard">
-                  <div class="userImg">
-                    <img src="{{asset('image/ArtistShowcase6.png')}}" alt="Artist1" class="img-fluid">
-                  </div>
-                  <div class="userDetails">
-                    <h6>Elizabeth Bishops</h6>
-                    <p>Art Expert</p>
-                  </div>
-              </div>
-              </a>
-            </div>
-            <div class="col-6 col-sm-6 col-md-3">
-              <a href="{{route('artist-showcase-profile')}}">
-                <div class="showCaseUserCard">
-                  <div class="userImg">
-                    <img src="{{asset('image/ArtistShowcase7.png')}}" alt="Artist1" class="img-fluid">
-                  </div>
-                  <div class="userDetails">
-                    <h6>Elizabeth Bishops</h6>
-                    <p>Art Expert</p>
-                  </div>
-              </div>
-              </a>
-            </div>
-            <div class="col-6 col-sm-6 col-md-3">
-              <a href="{{route('artist-showcase-profile')}}">
-                <div class="showCaseUserCard">
-                  <div class="userImg">
-                    <img src="{{asset('image/ArtistShowcase8.png')}}" alt="Artist1" class="img-fluid">
-                  </div>
-                  <div class="userDetails">
-                    <h6>Elizabeth Bishops</h6>
-                    <p>Art Expert</p>
-                  </div>
-              </div>
-              </a>
-            </div>
+                  </a>
+                </div>
+              @endforeach
+            @endif
           </div>
         </div>
       </div>
@@ -131,8 +44,9 @@
       <!-- pagging -->
       <div class="pagginWrapper">
         <div class="container">
-          <div class="pagging">
-            <a href="#">
+          <div class="pagging" style="margin: 0 50%;">
+            {{$artists->links()}}
+            <!-- <a href="#">
               <i class="fas fa-chevron-left"></i>
             </a>
             <div class="page active">
@@ -152,7 +66,7 @@
             </div>
             <a href="#">
               <i class="fas fa-chevron-right"></i>
-            </a>
+            </a> -->
           </div>
         </div>
       </div>

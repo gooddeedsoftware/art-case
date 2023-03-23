@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Art;
 use App\Models\User;
+use Auth;
 
 class ArtController extends Controller
 {
     public function index(Request $request){
-        $data = Art::with('artist')->get();
+        $data = Art::with('artist')->where('user_id', Auth::user()->id)->get();
+        if(Auth::user()->type === 'admin') {
+            $data = Art::get();
+        }
         return view('administrator.art.index', compact('data'));
     }
 

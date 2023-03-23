@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Poetry;
 use App\Models\User;
+use Auth;
 
 class PoetryController extends Controller
 {
     public function index(Request $request){
-        $data = Poetry::all();
+        $data = Poetry::with('author')->where('user_id', Auth::user()->id)->get();
+        if(Auth::user()->type === 'admin') {
+            $data = Poetry::all();
+        }
         return view('administrator.poetry.index', compact('data'));
     }
 

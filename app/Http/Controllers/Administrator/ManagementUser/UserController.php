@@ -23,18 +23,21 @@ class UserController extends Controller
 
     public function create(Request $request){
         $type = 'user';
-        return view("administrator.manage-user.createForm", compact('type'));
+        $edit = false;
+        return view("administrator.manage-user.create", compact('type', 'edit'));
         
     }
 
     public function createAuthor(Request $request){
         $type = 'author';
-        return view("administrator.manage-user.createForm", compact('type'));        
+        $edit = false;
+        return view("administrator.manage-user.create", compact('type', 'edit'));        
     }
 
     public function createArtist(Request $request){
         $type = 'artist';
-        return view("administrator.manage-user.createForm", compact('type'));
+        $edit = false;
+        return view("administrator.manage-user.create", compact('type', 'edit'));
     }
 
     public function store(Request $request)
@@ -74,18 +77,17 @@ class UserController extends Controller
     }
 
     public function edit(Request $request, $id){
-        $user = User::find($id);  
-        dd($user);
-        return view('administrator.art.create', compact('user'));
+        $user = User::find($id);
+        $edit = true;
+        $type = $user->type;
+        return view('administrator.manage-user.create', compact('user', 'edit', 'type'));
     }
     
 
     public function update(UpdateUserRequest $request, $id){
         try {
-            return $this->sendSuccess([
-                'message'   => 'User has been updated',
-                'data'      => $this->userService->update($request->all(), $id)
-            ]);
+            $this->userService->update($request->all(), $id);
+            return back()->with('success','Item update successfully!');
         } catch (\Exception $e) {
             return $this->sendError($e);
         }
@@ -93,10 +95,9 @@ class UserController extends Controller
 
     public function delete(Request $request, $id){
         try {
-            return $this->sendSuccess([
-                'message'   => 'User '.$request->name.' has been deleted',
-                'data'      => $this->userService->delete($id)
-            ]);
+            $data = User::find($id);
+            $data->delete();
+            return redirect()->back()->with('Success', 'Art Deleted Successfully.');
         } catch (\Exception $e) {
             return $this->sendError($e);
         }
