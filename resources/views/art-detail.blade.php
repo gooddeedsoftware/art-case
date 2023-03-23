@@ -6,18 +6,18 @@
         <div class="paintingCartWrapper">
           <div class="cartWrapper">
             <div class="paintingImg">
-              <img src="{{asset('image/postcart1.png')}}" alt="post" class="img-fluid" />
+              <img src="{{asset('uploads/art/'.$art->image)}}" alt="post" class="img-fluid" />
             </div>
             <div class="paintingDetails">
               <div class="paintingDescription">
-                <h3>Morden Artwork</h3>
-                <p>Size in Centimetres : 123 X 345 cm</p>
+                <h3>{{$art->title}}</h3>
+                <p>Size : {{$art->height}} X {{$art->width}} {{$art->size}}</p>
               </div>
-              <div class="shareImg">
+              <!-- <div class="shareImg">
                 <i class="fas fa-share-alt"></i>
-              </div>
+              </div> -->
               <div class="paintingRate">
-                <p>INR 2800</p>
+                <p>INR {{$art->price}}</p>
               </div>
               <div class="cartBtn wishlistBtn">
                 <a href="#">Add to Wish List</a>
@@ -62,20 +62,20 @@
             <div class="userProfileImg">
               <h4>Design By:</h4>
               <img
-                src="{{asset('image/userProfile.png')}}"
+                src="{{asset('uploads/users/'.$art->artist->image)}}"
                 alt="profile"
                 class="img-fluid"
+                style="height: 178px;border-radius: 15px;"
               />
             </div>
             <div class="profileDetails">
               <div class="userName">
-                <h3>Elizabeth Bishops &nbsp;&nbsp;<span>(Author)</span></h3>
+                <h3>{{$art->artist->first_name}} {{$art->artist->last_name}}</span></h3>
               </div>
               <div class="userBio">
                 <p><span>BIO</span></p>
                 <p>
-                  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                  At vero eos et accusam et justo duo dolores et ea rebum.
+                  {{$art->artist->aboutnote}}
                 </p>
               </div>
               <div class="userNumbers">
@@ -101,99 +101,46 @@
             <div class="row">
               <div class="col-12">
                 <h5>Product Review :</h5>
-                <form action="#">
-                  <textarea name="" id="" rows="3" placeholder="Write Your Review"></textarea>
+                <form action="{{route('add-review')}}" method="post">
+                  @csrf
+                  <input type="hidden" name="type" value="art">
+                  <input type="hidden" name="list_id" value="{{$art->id}}">
+                  <textarea name="review" id="" rows="3" placeholder="Write Your Review"></textarea>
                   <input type="submit" value="Post" />
                 </form>
               </div>
             </div>
             <div class="customerReviewWrapper">
               <b>Customer Review :</b>
-              <div class="customerReview">
-                <div class="row">
-                  <div class="col-1">
-                    <div class="customerImg">
-                      <img
-                        src="{{asset('image/Artist2.png')}}"
-                        alt="Artist"
-                        class="img-fluid w-100"
-                      />
-                    </div>
-                  </div>
-                  <div class="col-11">
-                    <div class="customerDetails">
-                      <div class="customername">
-                        <p>Elizabeth Bishops</p>
-                      </div>
-                      <div class="comment">
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing
-                          elit. Deleniti, impedit, expedita temporibus libero
-                          velit in doloribus illum voluptates rem error debitis
-                          culpa non hic blanditiis consequatur cumque ut
-                          excepturi, eveniet sunt animi iusto. Atque illum
-                          laudantium debitis molestias cum alias.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="customerReview">
-                <div class="row">
-                  <div class="col-1">
-                    <div class="customerImg">
-                      <img
-                        src="{{asset('image/Artist3.png')}}"
-                        alt="Artist"
-                        class="img-fluid w-100"
-                      />
-                    </div>
-                  </div>
-                  <div class="col-11">
-                    <div class="customerDetails">
-                      <div class="customername">
-                        <p>Elizabeth Bishops</p>
-                      </div>
-                      <div class="comment">
-                        <p>
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Corporis eligendi ea ullam ex. Facilis assumenda
-                          rem iure fugit consequatur dicta obcaecati, deleniti
-                          velit sed, quia, omnis numquam odit repudiandae
-                          tempora.
-                        </p>
+              @if($reviews)
+                  @foreach($reviews as $review)
+                    <div class="customerReview">
+                      <div class="row">
+                        <div class="col-1">
+                          <div class="customerImg">
+                            <img
+                              src="{{asset('uploads/users/'.$review->user->image)}}"
+                              alt="Artist"
+                              class="img-fluid w-100"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-11">
+                          <div class="customerDetails">
+                            <div class="customername">
+                              <p>{{$review->user->first_name}} {{$review->user->last_name}}</p>
+                            </div>
+                            <div class="comment">
+                              <p>
+                                {{$review->review}}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div class="customerReview">
-                <div class="row">
-                  <div class="col-1">
-                    <div class="customerImg">
-                      <img
-                        src="{{asset('image/Artist5.png')}}"
-                        alt="Artist"
-                        class="img-fluid w-100"
-                      />
-                    </div>
-                  </div>
-                  <div class="col-11">
-                    <div class="customerDetails">
-                      <div class="customername">
-                        <p>Elizabeth Bishops</p>
-                      </div>
-                      <div class="comment">
-                        <p>
-                          Lorem, ipsum dolor sit amet consectetur adipisicing
-                          elit. Ratione, aut!
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                  @endforeach
+                @endif
             </div>
           </div>
         </div>

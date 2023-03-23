@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArtController;
 use App\Http\Controllers\PoetryController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,11 +23,12 @@ Auth::routes(['verify' => true]);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/artist-showcase', [HomeController::class, 'artistShowCase'])->name('artist-showcase');
-Route::get('/artist-showcase-profile', [HomeController::class, 'artistShowCaseProfile'])->name('artist-showcase-profile');
-Route::get('/art-detail', [HomeController::class, 'artDetail'])->name('art-detail');
-Route::get('/poetry-detail', [HomeController::class, 'poetryDetail'])->name('poetry-detail');
+Route::get('/artist-showcase-profile/{id}', [HomeController::class, 'artistShowCaseProfile'])->name('artist-showcase-profile');
+Route::get('/art-detail/{id}', [HomeController::class, 'artDetail'])->name('art-detail');
+Route::get('/poetry-detail/{id}', [HomeController::class, 'poetryDetail'])->name('poetry-detail');
 Route::get('/author-showcase', [HomeController::class, 'authorShowCase'])->name('author-showcase');
-Route::get('/author-showcase-profile', [HomeController::class, 'authorShowCaseProfile'])->name('author-showcase-profile');
+Route::get('/author-showcase-profile/{id}', [HomeController::class, 'authorShowCaseProfile'])->name('author-showcase-profile');
+Route::post('add-review', [ReviewController::class, 'store'])->name('add-review');
 
 Route::prefix('administrator')->group(function () {
     Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');
@@ -34,7 +36,7 @@ Route::prefix('administrator')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('manage.user.index');
         Route::get('create', [UserController::class, 'create'])->name('manage.user.create');
         Route::post('store', [UserController::class, 'store'])->name('manage.user.store');
-        Route::get('edit{id}',[UserController::class,'edit'])->name('manage.user.edit');
+        Route::get('edit/{id}',[UserController::class,'edit'])->name('manage.user.edit');
         Route::put('update/{id}', [UserController::class, 'update'])->name('manage.user.update');
         Route::delete('delete/{id}', [UserController::class, 'delete'])->name('manage.user.delete');
         Route::get('author',[UserController::class,'author'])->name('author.index');

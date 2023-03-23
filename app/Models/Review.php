@@ -6,21 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Art extends Model
+class Review extends Model
 {
-    use SoftDeletes, HasFactory;
+    use HasFactory;
 
+    protected $table = 'reviews';
     protected $fillable = [
-        'title',
+        'type',
         'user_id',
-        'size',
-        'height',
-        'width',
-        'image',
-        'price',
+        'list_id',
+        'review'
     ];
-
-    public function artist()
+    
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }

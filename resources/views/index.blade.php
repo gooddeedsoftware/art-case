@@ -64,66 +64,20 @@
           </div>
         </div>
         <div class="owl-carousel owl-theme">
-          <div class="item">
-            <div class="artistWrapper">
-              <img src="{{asset('image/Artist1.png')}}" alt="Artist1" class="img-fluid" />
-              <a href="{{route('artist-showcase-profile')}}">
-                <div class="overlayText">
-                  View
+          @if($artists)
+            @foreach($artists as $artist)
+              <div class="item">
+                <div class="artistWrapper">
+                  <img src="{{asset('uploads/users/'.$artist->image)}}" alt="Artist1" class="img-fluid" />
+                  <a href="{{route('artist-showcase-profile', $artist->id)}}">
+                    <div class="overlayText">
+                      View
+                    </div>
+                  </a>
                 </div>
-              </a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="artistWrapper">
-              <img src="{{asset('image/Artist2.png')}}" alt="Artist2" class="img-fluid" />
-              <a href="{{route('artist-showcase-profile')}}">
-                <div class="overlayText">
-                  View
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="artistWrapper">
-              <img src="{{asset('image/Artist3.png')}}" alt="Artist3" class="img-fluid" />
-              <a href="{{route('artist-showcase-profile')}}">
-                <div class="overlayText">
-                  View
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="artistWrapper">
-              <img src="{{asset('image/Artist4.png')}}" alt="Artist4" class="img-fluid" />
-              <a href="{{route('artist-showcase-profile')}}">
-                <div class="overlayText">
-                  View
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="artistWrapper">
-              <img src="{{asset('image/Artist5.png')}}" alt="Artist5" class="img-fluid" />
-              <a href="{{route('artist-showcase-profile')}}">
-                <div class="overlayText">
-                  View
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="artistWrapper">
-              <img src="{{asset('image/Author1.png')}}" alt="Artist1" class="img-fluid" />
-              <a href="{{route('artist-showcase-profile')}}">
-                <div class="overlayText">
-                  View
-                </div>
-              </a>
-            </div>
-          </div>
+              </div>
+            @endforeach
+          @endif
         </div>
       </div>
     </div>
@@ -183,7 +137,7 @@
             <h2>Explore The Collection</h2>
           </div>
           <div class="viewAllBtn">
-            <a href="{{route('art-detail')}}" class="font-size-16">View All</a>
+            <a href="{{route('art-detail', 1)}}" class="font-size-16">View All</a>
           </div>
         </div>
 
@@ -191,7 +145,7 @@
 
           <div class="gallery">
             <div class="gallery__item gallery__item--1">
-              <a href="{{route('art-detail')}}" class="gallery__link">
+              <a href="{{route('art-detail', 1)}}" class="gallery__link">
                 <img src="{{asset('image/gallery4.png')}}" class="gallery__image" />
                 <div class="gallery__overlay">
                   <span>Balthus</span>
@@ -199,7 +153,7 @@
               </a>
             </div>
             <div class="gallery__item gallery__item--2">
-              <a href="{{route('art-detail')}}" class="gallery__link">
+              <a href="{{route('art-detail', 1)}}" class="gallery__link">
                 <img src="{{asset('image/gallery3.png')}}" class="gallery__image" />
                 <div class="gallery__overlay">
                   <span>Yaacov Agam</span>
@@ -207,7 +161,7 @@
               </a>
             </div>
             <div class="gallery__item gallery__item--3">
-              <a href="{{route('art-detail')}}" class="gallery__link">
+              <a href="{{route('art-detail', 1)}}" class="gallery__link">
                 <img src="{{asset('image/gallery1.png')}}" class="gallery__image" />
                 <div class="gallery__overlay">
                   <span>Max Ernst</span>
@@ -215,7 +169,7 @@
               </a>
             </div>
             <div class="gallery__item gallery__item--4">
-              <a href="{{route('art-detail')}}" class="gallery__link">
+              <a href="{{route('art-detail', 1)}}" class="gallery__link">
                 <img src="{{asset('image/gallery2.png')}}" class="gallery__image" />
                 <div class="gallery__overlay">
                   <span>Hilma af Klint</span>
@@ -223,7 +177,7 @@
               </a>
             </div>
             <div class="gallery__item gallery__item--5">
-              <a href="{{route('art-detail')}}" class="gallery__link">
+              <a href="{{route('art-detail', 1)}}" class="gallery__link">
                 <img src="{{asset('image/gallery6.png')}}" class="gallery__image" />
                 <div class="gallery__overlay">
                   <span>Ellen Lee</span>
@@ -231,7 +185,7 @@
               </a>
             </div>
             <div class="gallery__item gallery__item--6">
-              <a href="{{route('art-detail')}}" class="gallery__link">
+              <a href="{{route('art-detail', 1)}}" class="gallery__link">
                 <img src="{{asset('image/gallery5.png')}}" class="gallery__image" />
                 <div class="gallery__overlay">
                   <span>Red Grooms</span>
@@ -333,66 +287,20 @@
           </div>
         </div>
         <div class="owl-carousel owl-theme">
-          <div class="item">
-            <div class="artistWrapper">
-              <img src="{{asset('image/Author1.png')}}" alt="Author1" class="img-fluid" />
-              <a href="{{route('author-showcase-profile')}}">
-                <div class="overlayText">
-                  View
+          @if($authors)
+              @foreach($authors as $author)  
+                <div class="item">
+                  <div class="artistWrapper">
+                    <img src="{{asset('uploads/users/'.$artist->image)}}" alt="Author1" class="img-fluid" />
+                    <a href="{{route('author-showcase-profile', $author->id)}}">
+                      <div class="overlayText">
+                        View
+                      </div>
+                    </a>
+                  </div>
                 </div>
-              </a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="artistWrapper">
-              <img src="{{asset('image/Author2.png')}}" alt="Author2" class="img-fluid" />
-              <a href="{{route('author-showcase-profile')}}">
-                <div class="overlayText">
-                  View
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="artistWrapper">
-              <img src="{{asset('image/Author3.png')}}" alt="Author3" class="img-fluid" />
-              <a href="{{route('author-showcase-profile')}}">
-                <div class="overlayText">
-                  View
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="artistWrapper">
-              <img src="{{asset('image/Author4.png')}}" alt="Author4" class="img-fluid" />
-              <a href="{{route('author-showcase-profile')}}">
-                <div class="overlayText">
-                  View
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="artistWrapper">
-              <img src="{{asset('image/Artist2.png')}}" alt="Author1" class="img-fluid" />
-              <a href="{{route('author-showcase-profile')}}">
-                <div class="overlayText">
-                  View
-                </div>
-              </a>
-            </div>
-          </div>
-          <div class="item">
-            <div class="artistWrapper">
-              <img src="{{asset('image/Artist1.png')}}" alt="Artist1" class="img-fluid" />
-              <a href="{{route('author-showcase-profile')}}">
-                <div class="overlayText">
-                  View
-                </div>
-              </a>
-            </div>
-          </div>
+              @endforeach
+          @endif
         </div>
       </div>
     </div>

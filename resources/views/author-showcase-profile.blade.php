@@ -5,15 +5,15 @@
          <div class="profileDetailsWrapper">
         <div class="profileContainer">
           <div class="userProfileImg">
-            <img src="{{asset('image/userProfile.png')}}" alt="profile" class="img-fluid">
+            <img src="{{asset('uploads/users/'.$author->image)}}" alt="profile" class="img-fluid"  style="height: 178px;border-radius: 15px;">
           </div>
           <div class="profileDetails">
             <div class="userName">
-              <h3>Elizabeth Bishops &nbsp;&nbsp;<span>(Author)</span></h3>
+              <h3>{{$author->first_name}} {{$author->last_name}} <!-- &nbsp;&nbsp;<span>(Author) --></span></h3>
             </div>
             <div class="userBio">
               <p><span>BIO</span></p>
-              <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed At vero eos et accusam et justo duo dolores et ea rebum.</p>
+              <p>{{$author->aboutnote}}</p>
             </div>
             <div class="userNumbers">
               <div class="Number">
@@ -36,63 +36,29 @@
       <!-- post section -->
       <div class="postWrapper">
         <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <div class="poetryContainer">
-                <div class="poetryName">
-                  <h3>One Art</h3>
-                  <p>27 Jul 2021</p>
+            @if($poetry)
+              @foreach($poetry as $poet)
+                <div class="row">
+                  <div class="col-12">
+                    <div class="poetryContainer">
+                      <div class="poetryName">
+                        <h3>{{$poet->title}}</h3>
+                        <p>{{date('d M Y', strtotime($poet->created_at))}}</p>
+                      </div>
+                      <div class="poetryText">
+                        <p class="font-size-18">{{ Str::limit($poet->description, 165)}}</p>
+                      </div>
+                      <div class="poetryDetails">
+                        <a href="{{route('poetry-detail', $poet->id)}}">Details</a>
+                      </div>
+                      <div class="poetryProLike">
+                        <i class="fas fa-heart"></i> Like
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="poetryText">
-                  <p class="font-size-18">Elizabeth Bishop was an American poet and short-story writer. She was Consultant in Poetry to the Library of Congress from 1949 to 1950, the Pulitzer Prize winner for Poetry in 1956, the National Book…</p>
-                </div>
-                <div class="poetryDetails">
-                  <a href="{{route('poetry-detail')}}">Details</a>
-                </div>
-                <div class="poetryProLike">
-                  <i class="fas fa-heart"></i> Like
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <div class="poetryContainer">
-                <div class="poetryName">
-                  <h3>One Art</h3>
-                  <p>27 Jul 2021</p>
-                </div>
-                <div class="poetryText">
-                  <p class="font-size-18">Elizabeth Bishop was an American poet and short-story writer. She was Consultant in Poetry to the Library of Congress from 1949 to 1950, the Pulitzer Prize winner for Poetry in 1956, the National Book…</p>
-                </div>
-                <div class="poetryDetails">
-                  <a href="{{route('poetry-detail')}}">Details</a>
-                </div>
-                <div class="poetryProLike">
-                  <i class="fas fa-heart"></i> Like
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <div class="poetryContainer">
-                <div class="poetryName">
-                  <h3>One Art</h3>
-                  <p>27 Jul 2021</p>
-                </div>
-                <div class="poetryText">
-                  <p class="font-size-18">Elizabeth Bishop was an American poet and short-story writer. She was Consultant in Poetry to the Library of Congress from 1949 to 1950, the Pulitzer Prize winner for Poetry in 1956, the National Book…</p>
-                </div>
-                <div class="poetryDetails">
-                  <a href="{{route('poetry-detail')}}">Details</a>
-                </div>
-                <div class="poetryProLike">
-                  <i class="fas fa-heart"></i> Like
-                </div>
-              </div>
-            </div>
-          </div>
+              @endforeach
+            @endif
         </div>
       </div>
 

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Art;
+use App\Models\Poetry;
+use App\Models\Review;
 
 class HomeController extends Controller
 {
@@ -13,7 +16,12 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', [
+            'only' => [
+                'artDetail',
+                'poetryDetail'
+            ]
+        ]);
     }
 
     /**
@@ -23,8 +31,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data = User::all();
-        return view('index', compact('data'));
+        $artists = User::where('type', 'artist')->get();
+        $authors = User::where('type','author')->get();
+        return view('index', compact('artists', 'authors'));
     }
 
     /**
@@ -34,7 +43,8 @@ class HomeController extends Controller
      */
     public function artistShowCase()
     {
-        return view('artist-showcase');
+        $artists = User::where('type', 'artist')->paginate(10);
+        return view('artist-showcase', compact('artists'));
     }
 
     /**
@@ -42,9 +52,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function artistShowCaseProfile()
+    public function artistShowCaseProfile($id)
     {
-        return view('artist-showcase-profile');
+        $artist = User::find($id);
+        $arts = Art::where('user_id', $id)->get();
+        return view('artist-showcase-profile', compact('artist', 'arts'));
     }
 
     /**
@@ -52,9 +64,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function artDetail()
+    public function artDetail($id)
     {
-        return view('art-detail');
+        $art = Art::with('artist')->find($id);
+        $reviews = Review::with('user')->where('type', 'art')->where('list_id', $id)->get();
+        return view('art-detail', compact('art', 'reviews'));
     }
 
     /**
@@ -64,7 +78,8 @@ class HomeController extends Controller
      */
     public function authorShowCase()
     {
-        return view('author-showcase');
+        $authors = User::where('type', 'author')->paginate(10);
+        return view('author-showcase', compact('authors'));
     }
 
     /**
@@ -72,9 +87,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function authorShowCaseProfile()
+    public function authorShowCaseProfile($id)
     {
-        return view('author-showcase-profile');
+        $author = User::find($id);
+        $poetry = Poetry::where('user_id', $id)->get();
+        return view('author-showcase-profile', compact('author', 'poetry'));
     }
 
     /**
@@ -82,8 +99,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function poetryDetail()
+    public function poetryDetail($id)
     {
-        return view('poetry-detail');
+        $poetry = Poetry::find($id);
+        $reviews = Review::with('user')->where('type', 'poetry')->where('list_id', $id)->get();
+        return view('poetry-detail', compact('poetry', 'reviews'));
     }
 }

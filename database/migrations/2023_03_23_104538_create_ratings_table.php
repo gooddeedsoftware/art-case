@@ -13,18 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('art', function (Blueprint $table) {
+        Schema::create('ratings', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('art_id');
             $table->string('user_id');
-            $table->string('size');
-            $table->integer('height');
-            $table->integer('width');
-            $table->text('image')->nullable();
-            $table->string('price');
             $table->string('rating')->default(0);
+            $table->string('history');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -35,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('art');
+        Schema::dropIfExists('ratings');
     }
 };

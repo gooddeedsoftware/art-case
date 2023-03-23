@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('user_id');
             $table->text('description')->nullable();
             $table->text('image')->nullable();
+            $table->string('likes')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

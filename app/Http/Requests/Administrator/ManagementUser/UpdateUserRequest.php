@@ -24,17 +24,17 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'email' => 'required|email',
+            // 'name' => 'required',
+            // 'email' => 'required|email',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Name wajib diisi!',
-            'email.required' => 'Email wajib diisi!',
-            'email.email'    => 'Email harus berupa email!'
+            // 'first_name.required' => 'Name wajib diisi!',
+            // 'email.required' => 'Email wajib diisi!',
+            // 'email.email'    => 'Email harus berupa email!'
         ];
     }
 }
