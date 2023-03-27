@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->string('poertry_id');
+            $table->string('poetry_id');
             $table->string('user_id');
             $table->enum('like_count', [0, 1])->default(1);
-            $table->string('history');
+            $table->longText('history')->nullable();
             $table->timestamps();
         });
     }

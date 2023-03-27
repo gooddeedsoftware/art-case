@@ -17,12 +17,12 @@
             </div>
             <div class="userNumbers">
               <div class="Number">
-                <p><span class="font-size-20">0</span></p>
+                <p><span class="font-size-20">{{$arts->count()}}</span></p>
                 <p>Artworks</p>
               </div>
               <div class="Number">
-                <p><span class="font-size-20">0</span></p>
-                <p>Followers</p>
+                <p><span class="font-size-20">5 <i class="fa-solid fa-star" style="color: #f0d105;"></i></span></p>
+                <p>Rating</p>
               </div>
               <div class="Number">
                 <p><span class="font-size-20">0</span></p>
