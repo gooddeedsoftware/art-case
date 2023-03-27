@@ -56,6 +56,33 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script src="{{asset('js/main.js')}}"></script>
+<script>
+    $(document).on('click', '.add-like', function(){
+        let id = $(this).data('id');
+        let value = $(this).attr('data-value');
+        if(value == 1) {
+            $(this).attr('data-value', 0)
+        } else {
+            $(this).attr('data-value', 1)
+        }
+        const url = "{{ route('add-like', ['id' => ':id']) }}";
+        const formData = new FormData();
+        formData.append('id', id);
+        formData.append('like', value);
+        formData.append('_token', '{{ csrf_token() }}');
+        $.ajax({
+            url: url.replace(':id', id),
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(result) {
+                console.log(result);
+                //location.reload();
+            }
+        })
+    });
+</script>
 </body>
 
 </html>

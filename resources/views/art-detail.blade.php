@@ -84,8 +84,8 @@
                   <p>Articles</p>
                 </div>
                 <div class="Number">
-                  <p><span class="font-size-20">1.5M</span></p>
-                  <p>Followers</p>
+                  <p><span class="font-size-20">5 <i class="fa-solid fa-star" style="color: #f0d105;"></i></span></p>
+                  <p>Rating</p>
                 </div>
                 <div class="Number">
                   <p><span class="font-size-20">370</span></p>

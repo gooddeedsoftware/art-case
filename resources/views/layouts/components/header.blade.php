@@ -25,7 +25,7 @@
                 <ul>
                   <li><a href="#">Showcase Your Art</a></li>
                   @if(Auth::check())
-                    <li class="subMenuWrapper"><a href="Login.html" class="submenuLink">{{AUth::user()->first_name}}</a>
+                    <li class="subMenuWrapper"><a href="{{route('dashboard')}}" class="submenuLink">{{AUth::user()->first_name}}</a>
                       <div class="subMenu">
                         <ul>
                           <li><a href="{{route('dashboard')}}">Dashboard</a></li>
@@ -39,7 +39,7 @@
                       </div>
                     </li>
                   @else
-                    <li class="subMenuWrapper"><a href="Login.html" class="submenuLink">Login</a>
+                    <li class="subMenuWrapper"><a href="{{route('login')}}" class="submenuLink">Login</a>
                       <div class="subMenu">
                         <ul>
                           <li><a href="{{route('register')}}">Register Yourself</a></li>
@@ -75,21 +75,38 @@
                   <a class="nav-link" href="{{route('author-showcase')}}">Author</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="Register Yourself.html">Register Yourself</a>
+                  <a class="nav-link" href="{{route('register')}}">Register Yourself</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Showcase Your Art</a>
                 </li>
-                <li class="nav-item subMenuWrapper">
-                  Login
-                  <div class="subMenu">
-                    <ul>
-                      <li><a href="Register Yourself.html">Register Yourself</a></li>
-                      <li><a href="Login.html">Login For Artist</a></li>
-                      <li><a href="Login.html">Login For Author</a></li>
-                    </ul>
-                  </div>
-                </li>
+                @if(Auth::check())
+                    <li class="subMenuWrapper">
+                      <a href="{{route('dashboard')}}" class="submenuLink">{{AUth::user()->first_name}}</a>
+                      <div class="subMenu">
+                        <ul>
+                          <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                          <li>
+                            <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                              @csrf
+                            </form>
+                        </li>
+                        </ul>
+                      </div>
+                    </li>
+                @else
+                    <li class="nav-item subMenuWrapper">
+                      Login
+                      <div class="subMenu">
+                        <ul>
+                          <li><a href="{{route('register')}}">Register Yourself</a></li>
+                          <li><a href="{{route('login')}}">Login For Artist</a></li>
+                          <li><a href="{{route('login')}}">Login For Author</a></li>
+                        </ul>
+                      </div>
+                    </li>
+                @endif
               </ul>
             </div>
           </div>

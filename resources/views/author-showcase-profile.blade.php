@@ -17,12 +17,12 @@
             </div>
             <div class="userNumbers">
               <div class="Number">
-                <p><span class="font-size-20">3</span></p>
+                <p><span class="font-size-20">{{$poetry->count()}}</span></p>
                 <p>Articles</p>
               </div>
               <div class="Number">
-                <p><span class="font-size-20">1.5M</span></p>
-                <p>Followers</p>
+                <p><span class="font-size-20">100</span></p>
+                <p>Likes</p>
               </div>
               <div class="Number">
                 <p><span class="font-size-20">370</span></p>
@@ -52,7 +52,7 @@
                         <a href="{{route('poetry-detail', $poet->id)}}">Details</a>
                       </div>
                       <div class="poetryProLike">
-                        <i class="fas fa-heart"></i> Like
+                        <i class="fas fa-heart add-like @if(Auth::check() && Auth::user()->checkLike($poet->id)){{'active'}}@endif" data-id="{{$poet->id}}"  data-value="@if(Auth::check() && Auth::user()->checkLike($poet->id)){{'0'}}@else{{'1'}}@endif"></i> Like
                       </div>
                     </div>
                   </div>
