@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Art;
 use App\Models\Poetry;
 use App\Models\Review;
+use App\Models\Rating;
 
 class HomeController extends Controller
 {
@@ -56,7 +57,8 @@ class HomeController extends Controller
     {
         $artist = User::find($id);
         $arts = Art::where('user_id', $id)->get();
-        return view('artist-showcase-profile', compact('artist', 'arts'));
+        $viewSum = Art::where('user_id',$id)->pluck('views')->sum();
+        return view('artist-showcase-profile', compact('artist', 'arts', 'viewSum'));
     }
 
     /**
@@ -68,7 +70,10 @@ class HomeController extends Controller
     {
         $art = Art::with('artist')->find($id);
         $reviews = Review::with('user')->where('type', 'art')->where('list_id', $id)->get();
-        return view('art-detail', compact('art', 'reviews'));
+        $rating = Rating::where('art_id', $id)->latest()->first();
+        $this->updateViews($art);
+        $viewSum = Art::where('user_id', $art->user_id)->pluck('views')->sum();
+        return view('art-detail', compact('art', 'reviews', 'rating', 'viewSum'));
     }
 
     /**
@@ -91,7 +96,8 @@ class HomeController extends Controller
     {
         $author = User::find($id);
         $poetry = Poetry::where('user_id', $id)->get();
-        return view('author-showcase-profile', compact('author', 'poetry'));
+        $viewSum = Poetry::where('user_id',$id)->pluck('views')->sum();
+        return view('author-showcase-profile', compact('author', 'poetry', 'viewSum'));
     }
 
     /**
@@ -103,6 +109,19 @@ class HomeController extends Controller
     {
         $poetry = Poetry::find($id);
         $reviews = Review::with('user')->where('type', 'poetry')->where('list_id', $id)->get();
+        $this->updateViews($poetry);
         return view('poetry-detail', compact('poetry', 'reviews'));
+    }
+
+    /**
+     * Count the views of portry and art.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateViews($model)
+    {
+        $view = $model->views;
+        $model->views = $view + 1;
+        $model->save();
     }
 }

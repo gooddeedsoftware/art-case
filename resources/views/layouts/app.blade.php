@@ -30,11 +30,11 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}" />
 </head>
 @include('layouts.components.header')
-    <!-- main -->
-    <main>
-        @yield('content')
-    </main>
-    <!-- end main -->
+<!-- main -->
+<main>
+    @yield('content')
+</main>
+<!-- end main -->
 @include('layouts.components.footer')
 
 <!-- jquery js -->
@@ -47,8 +47,8 @@
 
 <!-- Bootstrap JS File -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"></script>
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+</script>
 
 <!-- Owl JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
@@ -57,31 +57,74 @@
 
 <script src="{{asset('js/main.js')}}"></script>
 <script>
-    $(document).on('click', '.add-like', function(){
-        let id = $(this).data('id');
-        let value = $(this).attr('data-value');
-        if(value == 1) {
-            $(this).attr('data-value', 0)
-        } else {
-            $(this).attr('data-value', 1)
+$(document).on('click', '.add-like', function() {
+    let id = $(this).data('id');
+    let value = $(this).attr('data-value');
+    if (value == 1) {
+        $(this).attr('data-value', 0)
+    } else {
+        $(this).attr('data-value', 1)
+    }
+    const url = "{{ route('add-like', ['id' => ':id']) }}";
+    const formData = new FormData();
+    formData.append('id', id);
+    formData.append('like', value);
+    formData.append('_token', '{{ csrf_token() }}');
+    $.ajax({
+        url: url.replace(':id', id),
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(result) {
+            console.log(result);
+            //location.reload();
         }
-        const url = "{{ route('add-like', ['id' => ':id']) }}";
-        const formData = new FormData();
-        formData.append('id', id);
-        formData.append('like', value);
-        formData.append('_token', '{{ csrf_token() }}');
-        $.ajax({
-            url: url.replace(':id', id),
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(result) {
-                console.log(result);
-                //location.reload();
+    })
+});
+
+$(document).ready(function() {
+
+    /* 1. Visualizing things on Hover - See next part for action on click */
+    $('#stars li').on('mouseover', function() {
+        var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
+
+        // Now highlight all the stars that's not after the current hovered star
+        $(this).parent().children('li.star').each(function(e) {
+            if (e < onStar) {
+                $(this).addClass('hover');
+            } else {
+                $(this).removeClass('hover');
             }
-        })
+        });
+
+    }).on('mouseout', function() {
+        $(this).parent().children('li.star').each(function(e) {
+            $(this).removeClass('hover');
+        });
     });
+
+
+    /* 2. Action to perform on click */
+    $('#stars li').on('click', function() {
+        var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+        var stars = $(this).parent().children('li.star');
+
+        for (i = 0; i < stars.length; i++) {
+            $(stars[i]).removeClass('selected');
+        }
+
+        for (i = 0; i < onStar; i++) {
+            $(stars[i]).addClass('selected');
+        }
+
+        // JUST RESPONSE (Not needed)
+        var ratingValue = parseInt($('#stars li.selected').last().data('value'), 10);
+        $('#ratingInput').val(ratingValue);
+    });
+
+
+});
 </script>
 </body>
 

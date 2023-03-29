@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('width');
             $table->text('image')->nullable();
             $table->string('price');
-            $table->string('rating')->default(0);
+            $table->string('views')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

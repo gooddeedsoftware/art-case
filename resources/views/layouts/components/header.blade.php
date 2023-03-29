@@ -23,7 +23,7 @@
             <div class="col-md-4">
               <div class="leftmenuWrapper">
                 <ul>
-                  <li><a href="#">Showcase Your Art</a></li>
+                  <!-- <li><a href="#">Showcase Your Art</a></li> -->
                   @if(Auth::check())
                     <li class="subMenuWrapper"><a href="{{route('dashboard')}}" class="submenuLink">{{AUth::user()->first_name}}</a>
                       <div class="subMenu">
@@ -39,12 +39,13 @@
                       </div>
                     </li>
                   @else
+                    <li><a href="{{route('register')}}">Register</a></li>
                     <li class="subMenuWrapper"><a href="{{route('login')}}" class="submenuLink">Login</a>
                       <div class="subMenu">
                         <ul>
-                          <li><a href="{{route('register')}}">Register Yourself</a></li>
-                          <li><a href="{{route('login')}}">Login For Artist</a></li>
-                          <li><a href="{{route('login')}}">Login For Author</a></li>
+                          <li><a href="{{route('login')}}">Login As User</a></li>
+                          <li><a href="{{route('login')}}">Login As Artist</a></li>
+                          <li><a href="{{route('login')}}">Login As Author</a></li>
                         </ul>
                       </div>
                     </li>
@@ -77,9 +78,9 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{{route('register')}}">Register Yourself</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a class="nav-link" href="#">Showcase Your Art</a>
-                </li>
+                </li> -->
                 @if(Auth::check())
                     <li class="subMenuWrapper">
                       <a href="{{route('dashboard')}}" class="submenuLink">{{AUth::user()->first_name}}</a>
@@ -96,11 +97,14 @@
                       </div>
                     </li>
                 @else
+                    <li class="nav-item">
+                      <a class="nav-link" href="{{route('register')}}">Register</a>
+                    </li>
                     <li class="nav-item subMenuWrapper">
                       Login
                       <div class="subMenu">
                         <ul>
-                          <li><a href="{{route('register')}}">Register Yourself</a></li>
+                          <li><a href="{{route('login')}}">Login As User</a></li>
                           <li><a href="{{route('login')}}">Login For Artist</a></li>
                           <li><a href="{{route('login')}}">Login For Author</a></li>
                         </ul>

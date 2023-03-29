@@ -21,11 +21,11 @@
                 <p>Artworks</p>
               </div>
               <div class="Number">
-                <p><span class="font-size-20">5 <i class="fa-solid fa-star" style="color: #f0d105;"></i></span></p>
+                <p><span class="font-size-20">{{$artist->avarage_rating($artist->id)?$artist->avarage_rating($artist->id):0}} <i class="fa-solid fa-star" style="color: #f0d105;"></i></span></p>
                 <p>Rating</p>
               </div>
               <div class="Number">
-                <p><span class="font-size-20">0</span></p>
+                <p><span class="font-size-20">{{$viewSum}}</span></p>
                 <p>Views</p>
               </div>
             </div>

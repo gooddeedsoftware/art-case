@@ -1812,3 +1812,44 @@ footer .cpoyrightText p {
   }
 }
 /*# sourceMappingURL=style.css.map */
+
+/* By Vikas */
+
+.paintingDetails {
+  width: 250px;
+}
+
+.paintingImg {
+  width: 368px;
+}
+
+.rating-stars ul {
+  list-style-type:none;
+  padding:0;  
+  -moz-user-select:none;
+  -webkit-user-select:none;
+}
+.rating-stars ul > li.star {
+  display:inline-block;
+  
+}
+
+.rating-stars ul > li.star > i.fa {
+  font-size:1em; 
+  color:#ccc;
+}
+
+.rating-stars ul > li.star.hover > i.fa {
+  color:#FFCC36;
+}
+
+.rating-stars ul > li.star.selected > i.fa {
+  color:#FF912C;
+}
+
+.main-rating.fa.fa-star.active {
+    color: #FF912C;
+}
+
+
+/* By Vikas */
