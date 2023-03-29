@@ -4,19 +4,51 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Review;
+use App\Models\Rating;
 use App\Models\Like;
 use App\Models\Poetry;
+use App\Models\Art;
 use Auth;
 
 class ReviewController extends Controller
 {
      public function store(Request $request) {
-         Review::create([
-            'user_id' => Auth::user()->id,
-            'type' => $request->type,
-            'list_id' => $request->list_id,
-            'review' => $request->review
-         ]);
+        if($request->review !== null) {
+            Review::create([
+                'user_id' => Auth::user()->id,
+                'type' => $request->type,
+                'list_id' => $request->list_id,
+                'review' => $request->review
+            ]);
+        }
+         if($request->rating !== 0) {
+            $poetry = Art::find($request->list_id);
+            if(!$poetry) {
+                return redirect()->back()->with('error' ,'Art Not Found.');
+            }
+            $user_id = Auth::user()->id;
+            $user_name = Auth::user()->first_name.' '. Auth::user()->last_name;
+            $date = date('Y-m-d h:i:s');
+            $checkRating = Rating::where('user_id', $user_id)->where('art_id', $request->list_id)->first();
+            if($checkRating) {
+                $history = json_decode($checkRating->history);
+                array_push($history,"Rated $poetry->title By $user_name ON $date");
+                Rating::where('user_id', $user_id)->where('art_id', $request->list_id)->update(
+                    [
+                        'rating' => $request->rating,
+                        'history' => json_encode($history)
+                    ]
+                );
+                return redirect()->back()->with('success', 'Rating Update Successfully.');
+            }
+            $history = ["Rated $poetry->title By $user_name On $date"];
+            Rating::create([
+                'user_id' => Auth::user()->id,
+                'art_id' => $request->list_id,
+                'rating' => $request->rating,
+                'history' => json_encode($history)
+             ]);
+         }
          return redirect()->back()->with('success', 'Review Added Successfully.');
      }
 

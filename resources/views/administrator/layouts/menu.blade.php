@@ -53,3 +53,11 @@
     </a>
 </li>
 @endif
+<li class="nav-item {{ request()->is('*poetry-table*') ? 'menu-opening menu-open' : '' }}">
+    <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link">
+        <i class="nav-icon fas fa-tachometer-alt"></i>
+        <p>
+        Logout
+        </p>
+    </a>
+</li>

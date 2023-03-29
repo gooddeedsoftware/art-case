@@ -21,11 +21,11 @@
                 <p>Articles</p>
               </div>
               <div class="Number">
-                <p><span class="font-size-20">100</span></p>
+                <p><span class="font-size-20">{{$author->number_of_likes($author->id)}}</span></p>
                 <p>Likes</p>
               </div>
               <div class="Number">
-                <p><span class="font-size-20">370</span></p>
+                <p><span class="font-size-20">{{$viewSum}}</span></p>
                 <p>Views</p>
               </div>
             </div>

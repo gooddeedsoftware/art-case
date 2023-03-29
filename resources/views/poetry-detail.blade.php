@@ -14,7 +14,7 @@
             </div>
             <div class="poetryPerformance">
               <div class="poetryLike">
-                <p>33 View {{$reviews->count()}} comments</p>
+                <p>{{$poetry->views}} View {{$reviews->count()}} comments</p>
               </div>
               <div class="poetryLike">
               <i class="fas fa-heart add-like @if(Auth::check() && Auth::user()->checkLike($poetry->id)){{'active'}}@endif" data-id="{{$poetry->id}}"  data-value="@if(Auth::check() && Auth::user()->checkLike($poetry->id)){{'0'}}@else{{'1'}}@endif"></i> Like
