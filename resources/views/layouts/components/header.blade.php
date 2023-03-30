@@ -29,6 +29,7 @@
                       <div class="subMenu">
                         <ul>
                           <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                          <li><a href="{{route('wishlist')}}">Wishlist({{Auth::user()->wishlist->count()}})</a></li>
                           <li>
                             <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -87,6 +88,7 @@
                       <div class="subMenu">
                         <ul>
                           <li><a href="{{route('dashboard')}}">Dashboard</a></li>
+                          <li><a href="{{route('wishlist')}}">Wishlist({{Auth::user()->wishlist->count()}})</a></li>
                           <li>
                             <a onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
