@@ -20,7 +20,7 @@
                     <p>INR {{$art->price}}</p>
                 </div>
                 <div class="cartBtn wishlistBtn">
-                    <a href="#">Add to Wish List</a>
+                     <a id="wishlistForm" >Add to Wish List</a>
                 </div>
                 <div class="cartBtn paingingBuyBtn">
                     <a href="#">Buy Now</a>
@@ -141,6 +141,29 @@
         </div>
     </div>
 </div>
-
 <!-- main section -->
+@endsection
+@section('script')
+<script>
+    $(document).on('click', '#wishlistForm', function() {
+        let id = "{{request()->route('id')}}";
+        const url = "{{ route('add-wishlist', ['id' => ':id']) }}";
+        const formData = new FormData();
+        formData.append('list_id', id);
+        formData.append('type', 'art');
+        formData.append('_token', '{{ csrf_token() }}');
+        $.ajax({
+            url: url.replace(':id', id),
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(result) {
+                console.log(result);
+                //location.reload();
+            }
+        })
+    });
+
+</script>
 @endsection

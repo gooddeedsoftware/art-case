@@ -56,6 +56,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script src="{{asset('js/main.js')}}"></script>
+@yield('script')
 <script>
 $(document).on('click', '.add-like', function() {
     let id = $(this).data('id');

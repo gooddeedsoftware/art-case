@@ -30,6 +30,9 @@ Route::get('/author-showcase', [HomeController::class, 'authorShowCase'])->name(
 Route::get('/author-showcase-profile/{id}', [HomeController::class, 'authorShowCaseProfile'])->name('author-showcase-profile');
 Route::post('add-review', [ReviewController::class, 'store'])->name('add-review');
 Route::post('add-like/{id}', [ReviewController::class, 'like'])->name('add-like');
+Route::get('/wishlist', [ReviewController::class, 'wishlist'])->name('wishlist');
+Route::post('add-wishlist/{id}', [ReviewController::class, 'addToWishlist'])->name('add-wishlist');
+Route::post('remove-wishlist/{id}', [ReviewController::class, 'removeWishlist'])->name('remove-wishlist');
 
 Route::prefix('administrator')->group(function () {
     Route::get('/dashboard', [UserController::class, 'index'])->name('dashboard');

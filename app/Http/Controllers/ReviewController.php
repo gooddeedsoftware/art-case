@@ -8,6 +8,7 @@ use App\Models\Rating;
 use App\Models\Like;
 use App\Models\Poetry;
 use App\Models\Art;
+use App\Models\Wishlist;
 use Auth;
 
 class ReviewController extends Controller
@@ -85,4 +86,45 @@ class ReviewController extends Controller
          ]);
          return response()->json(['success'=>'Like Added Successfully.']);
      }
+
+    public function wishlist(Request $request)
+    {
+        return view('wishlist');
+    }
+     
+    public function addToWishlist(Request $request)
+    {
+        $this->validate($request, array(
+            'list_id' =>'required',
+            'type' =>'required',
+            ));
+
+        $status = Wishlist::where('user_id',Auth::user()->id)
+                    ->where('list_id',$request->list_id)
+                    ->where('type',$request->type)
+                    ->first();
+
+        if(isset($status->user_id) && isset($request->list_id))
+        {
+            return response()->json(['flash_messaged' => 'This art is already in your wishlist!']);
+        }
+        else
+        {
+            $wishlist = new Wishlist;
+
+            $wishlist->user_id = Auth::user()->id;
+            $wishlist->list_id = $request->list_id;
+            $wishlist->type = $request->type;
+            $wishlist->save();
+
+            return response()->json(['flash_message' => 'Art , '. $wishlist->listing->title.' Added to your wishlist.']);
+        }
+    }
+
+    public function removeWishlist(Request $request)
+    {
+      $wishlist = Wishlist::findOrFail($request->id);
+      $wishlist->delete();
+      return response()->json(['flash_message' => 'Art removed from wishlist.']);
+    }
 }

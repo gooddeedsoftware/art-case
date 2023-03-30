@@ -61,4 +61,8 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return Rating::join('art', 'art.id', '=', 'ratings.art_id')->where('art.user_id', $id)->avg('ratings.rating');
     }
+
+    public function wishlist(){
+        return $this->hasMany(Wishlist::class);
+     }
 }
