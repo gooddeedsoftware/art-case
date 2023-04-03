@@ -106,7 +106,7 @@ class ReviewController extends Controller
 
         if(isset($status->user_id) && isset($request->list_id))
         {
-            return response()->json(['flash_messaged' => 'This art is already in your wishlist!']);
+            return response()->json(['message' => 'This art is already in your wishlist!']);
         }
         else
         {
@@ -117,7 +117,28 @@ class ReviewController extends Controller
             $wishlist->type = $request->type;
             $wishlist->save();
 
-            return response()->json(['flash_message' => 'Art , '. $wishlist->listing->title.' Added to your wishlist.']);
+            return response()->json(['message' => 'Art , '. $wishlist->listing->title.' Added to your wishlist.']);
+        }
+    }
+     
+    public function featured(Request $request)
+    {
+        $this->validate($request, array(
+            'id' =>'required',
+        ));
+
+        $status = Art::find($request->id);
+        if($status->featured)
+        {
+            $status->featured = '0';
+            $status->save();
+            return response()->json(['message' => 'Art , '. $status->title.' Removed from featured !']);
+        }
+        else
+        {
+            $status->featured = '1';
+            $status->save();
+            return response()->json(['message' => 'Art , '. $status->title.' Added to Featured list.']);
         }
     }
 
@@ -125,6 +146,6 @@ class ReviewController extends Controller
     {
       $wishlist = Wishlist::findOrFail($request->id);
       $wishlist->delete();
-      return response()->json(['flash_message' => 'Art removed from wishlist.']);
+      return response()->json(['message' => 'Art removed from wishlist.']);
     }
 }

@@ -56,6 +56,7 @@ Route::prefix('administrator')->group(function () {
         Route::get('edit/{id}',[ArtController::class,'edit'])->name('art.edit');
         Route::post('update/{id}', [ArtController::class, 'update'])->name('art.update');
         Route::delete('delete/{id}', [ArtController::class, 'delete'])->name('art.delete');
+        Route::post('featured', [ReviewController::class, 'featured'])->name('art.featured');
     });
     
     Route::prefix('poetry')->group(function () {

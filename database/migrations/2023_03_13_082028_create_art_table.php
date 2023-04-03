@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('image')->nullable();
             $table->string('price');
             $table->string('views')->default(0);
+            $table->enum('featured', ['0', '1'])->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -40,16 +40,16 @@
     };
 
     const swalSuccess = (message, html = "") => {
-        swalSetup('Operasi Sukses', message, 'success', html);
+        swalSetup('Success', message, 'success', html);
     }
     const swalError = (message, html = "") => {
-        swalSetup('Ada kesalahan', message, 'error', html);
+        swalSetup('Error', message, 'error', html);
     }
     const swalWarning = (message, html = "") => {
-        swalSetup('Perhatian', message, 'warning', html);
+        swalSetup('Warning', message, 'warning', html);
     }
     const swalCancel = (message, html = "") => {
-        swalSetup('Dibatalkan', message, 'error', html);
+        swalSetup('Cancel', message, 'error', html);
     }
     const swalValidation = (errors) => {
         let values = '<span>';

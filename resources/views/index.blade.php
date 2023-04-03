@@ -98,26 +98,26 @@
               <div class="row">
                 <div class="col-3">
                   <div class="numbers">
-                    <div class="counter"><em>79</em>+</div>
-                    <p class="font-size-14">Exhibitions</p>
+                    <div class="counter"><em>{{count($artists)}}</em>+</div>
+                    <p class="font-size-14">Artists</p>
                   </div>
                 </div>
                 <div class="col-3">
                   <div class="numbers">
-                    <div class="counter"><em>954</em>+</div>
-                    <p class="font-size-14">Visitors</p>
+                    <div class="counter"><em>{{count($authors)}}</em>+</div>
+                    <p class="font-size-14">Authors</p>
                   </div>
                 </div>
                 <div class="col-3">
                   <div class="numbers">
-                    <div class="counter"><em>8</em>+</div>
-                    <p class="font-size-14">Awards</p>
+                    <div class="counter"><em>{{$artCount}}</em>+</div>
+                    <p class="font-size-14">Art's</p>
                   </div>
                 </div>
                 <div class="col-3">
                   <div class="numbers">
-                    <div class="counter"><em>567</em>+</div>
-                    <p class="font-size-14">Collections</p>
+                    <div class="counter"><em>{{$poetryCount}}</em>+</div>
+                    <p class="font-size-14">Poetries</p>
                   </div>
                 </div>
               </div>
@@ -137,61 +137,25 @@
             <h2>Explore The Collection</h2>
           </div>
           <div class="viewAllBtn">
-            <a href="{{route('art-detail', 1)}}" class="font-size-16">View All</a>
+            <a href="{{route('artist-showcase')}}" class="font-size-16">View All</a>
           </div>
         </div>
 
         <div class="wrapper">
 
           <div class="gallery">
-            <div class="gallery__item gallery__item--1">
-              <a href="{{route('art-detail', 1)}}" class="gallery__link">
-                <img src="{{asset('image/gallery4.png')}}" class="gallery__image" />
-                <div class="gallery__overlay">
-                  <span>Balthus</span>
+            @if($featured_art->count() > 0)
+              @foreach($featured_art as $key => $feature)
+                <div class="gallery__item gallery__item--{{$key + 1 }}">
+                  <a href="{{route('art-detail', 1)}}" class="gallery__link">
+                    <img src="{{asset('uploads/art/'.$feature->image)}}" class="gallery__image" />
+                    <div class="gallery__overlay">
+                      <span>{{$feature->title}}</span>
+                    </div>
+                  </a>
                 </div>
-              </a>
-            </div>
-            <div class="gallery__item gallery__item--2">
-              <a href="{{route('art-detail', 1)}}" class="gallery__link">
-                <img src="{{asset('image/gallery3.png')}}" class="gallery__image" />
-                <div class="gallery__overlay">
-                  <span>Yaacov Agam</span>
-                </div>
-              </a>
-            </div>
-            <div class="gallery__item gallery__item--3">
-              <a href="{{route('art-detail', 1)}}" class="gallery__link">
-                <img src="{{asset('image/gallery1.png')}}" class="gallery__image" />
-                <div class="gallery__overlay">
-                  <span>Max Ernst</span>
-                </div>
-              </a>
-            </div>
-            <div class="gallery__item gallery__item--4">
-              <a href="{{route('art-detail', 1)}}" class="gallery__link">
-                <img src="{{asset('image/gallery2.png')}}" class="gallery__image" />
-                <div class="gallery__overlay">
-                  <span>Hilma af Klint</span>
-                </div>
-              </a>
-            </div>
-            <div class="gallery__item gallery__item--5">
-              <a href="{{route('art-detail', 1)}}" class="gallery__link">
-                <img src="{{asset('image/gallery6.png')}}" class="gallery__image" />
-                <div class="gallery__overlay">
-                  <span>Ellen Lee</span>
-                </div>
-              </a>
-            </div>
-            <div class="gallery__item gallery__item--6">
-              <a href="{{route('art-detail', 1)}}" class="gallery__link">
-                <img src="{{asset('image/gallery5.png')}}" class="gallery__image" />
-                <div class="gallery__overlay">
-                  <span>Red Grooms</span>
-                </div>
-              </a>
-            </div>
+              @endforeach
+            @endif
           </div>
         </div>
       </div>
