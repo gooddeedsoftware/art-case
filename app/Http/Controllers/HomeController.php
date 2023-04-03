@@ -34,7 +34,10 @@ class HomeController extends Controller
     {
         $artists = User::where('type', 'artist')->get();
         $authors = User::where('type','author')->get();
-        return view('index', compact('artists', 'authors'));
+        $featured_art = Art::where('featured', '1')->get();
+        $artCount = Art::count();
+        $poetryCount = Poetry::count();
+        return view('index', compact('artists', 'authors', 'featured_art', 'artCount', 'poetryCount'));
     }
 
     /**

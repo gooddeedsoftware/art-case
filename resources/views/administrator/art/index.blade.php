@@ -44,6 +44,7 @@
                                     <thead class="thead-dark">
                                         <tr role="row">
                                             <th>No</th>
+                                            <th>Feature Art</th>
                                             <th>Title</th>
                                             <th>Artist Name</th>
                                             <th>Art</th>
@@ -57,6 +58,7 @@
                                         @foreach($data as $d)
                                     <tr role="row">
                                             <td>{{$d->id}}</td>
+                                            <td><input type="checkbox" name="featured" class="featured" id="featured" data-id="{{$d->id}}" value="1" <?php echo ($d->featured == 1 ? ' checked' : ''); ?>></td>
                                             <td>{{$d->title}}</td>
                                             <td>{{$d->artist->first_name}} {{$d->artist->last_name}}</td>
                                             <td>
@@ -128,7 +130,26 @@
                         })
                     }
                 })
-            })
+            });
+            $('#table-user').on('click', '.featured', function(event){
+                let id = $(this).attr('data-id');
+                const url      = "{{ route('art.featured') }}";
+                const formData = new FormData();
+                formData.append('id', id);
+                formData.append('_token', '{{ csrf_token() }}');
+
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(result) {
+                        swalSuccess('',result.message);
+                        //location.reload();
+                    }
+                });
+            });
         })
     </script>
 @endpush
